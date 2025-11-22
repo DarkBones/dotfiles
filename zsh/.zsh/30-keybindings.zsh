@@ -37,5 +37,3 @@ bindkey -M vicmd "$ARROW_DOWN"  down-history
 
 # Accept auto suggestions
 bindkey '^A' autosuggest-accept
-
-unset ARROW_UP ARROW_DOWN DELETE_KEY
