@@ -3,8 +3,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export ZDOTDIR="$HOME/.zsh" # TODO: Change to "$HOME/.zsh"
+# Point to the actual config dir (symlink created by Snowman)
+export ZDOTDIR="${ZDOTDIR:-$HOME/.zsh}"
+
 source "$ZDOTDIR/main.zsh"
 
-# To customize prompt, run `p10k configure` or edit dotfiles/zsh/.zsh/.p10k.zsh.
-[[ ! -f ~/Developer/new_dotfiles/dotfiles/zsh/.zsh/.p10k.zsh ]] || source ~/Developer/new_dotfiles/dotfiles/zsh/.zsh/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit $ZDOTDIR/.p10k.zsh.
+[[ -f "$ZDOTDIR/.p10k.zsh" ]] && source "$ZDOTDIR/.p10k.zsh"
