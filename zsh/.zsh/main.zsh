@@ -7,6 +7,7 @@ for rc in \
   "$ZDOTDIR/10-path.zsh" \
   "$ZDOTDIR/20-env.zsh" \
   "$ZDOTDIR/30-keybindings.zsh" \
+  "$ZDOTDIR/35-aliases-core.zsh" \
   "$ZDOTDIR/40-completion.zsh" \
   "$ZDOTDIR/50-plugins.zsh" \
   "$ZDOTDIR/60-theme.zsh" \
