@@ -19,17 +19,17 @@ for var in ${(k)parameters}; do
   # Only variables ending with _SECRET_PATH
   [[ "$var" == *_SECRET_PATH ]] || continue
 
-  # Read value of $var (path to secret)
-  local path="${(P)var}"
+  # Read value of $var (secret_path to secret)
+  local secret_path="${(P)var}"
 
   # Must be an absolute readable file pointing inside /run/secrets/
-  if [[ -n "$path" && -r "$path" && "$path" == /run/secrets/* ]]; then
+  if [[ -n "$secret_path" && -r "$secret_path" && "$secret_path" == /run/secrets/* ]]; then
     # Strip suffix: FOO_SECRET_PATH → FOO
     local base="${var%_SECRET_PATH}"
 
     # Read file content into the new variable name
     local value
-    value="$(<"$path")"
+    value="$(<"$secret_path")"
 
     # Export new variable holding the actual secret
     export "$base=$value"
