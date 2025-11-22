@@ -1,5 +1,5 @@
 # Default theme if none specified
-PROMPT_THEME="${PROMPT_THEME:-minimal}"
+PROMPT_THEME="${PROMPT_THEME:-p10k}"
 
 THEME_DIR="$ZDOTDIR/themes"
 

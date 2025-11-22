@@ -13,12 +13,6 @@
 
         shellHook = ''
           export ZDOTDIR="$PWD/zsh" # TODO: Change to $HOME
-          echo
-          echo "🧊 Zsh sandbox active"
-          echo "   ZDOTDIR = $ZDOTDIR"
-          echo "   Run 'zsh' to start a shell using your NEW config."
-          echo "   Type 'exit' to leave zsh, then 'exit' again to leave the devShell."
-          echo
         '';
       };
     };
