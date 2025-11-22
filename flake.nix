@@ -12,7 +12,7 @@
         packages = with pkgs;[ zsh git fd ripgrep fzf neofetch watchexec ];
 
         shellHook = ''
-          export ZDOTDIR="$PWD/zsh" # TODO: Change to $HOME
+          export ZDOTDIR="$PWD/zsh/.zsh"
         '';
       };
     };
