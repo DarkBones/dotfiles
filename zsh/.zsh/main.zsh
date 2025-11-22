@@ -11,6 +11,7 @@ for rc in \
   "$ZDOTDIR/40-completion.zsh" \
   "$ZDOTDIR/50-plugins.zsh" \
   "$ZDOTDIR/60-theme.zsh" \
+  "$ZDOTDIR/80-roles.zsh" \
   "$ZDOTDIR/90-local.zsh"
 do
   [ -f "$rc" ] && source "$rc"

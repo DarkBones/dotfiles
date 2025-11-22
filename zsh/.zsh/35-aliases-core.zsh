@@ -16,7 +16,7 @@ fi
 
 if command -v bat > /dev/null 2>&1; then
   alias cat='bat'
-end
+fi
 
 function s() {
     [ -z $1 ] && {
