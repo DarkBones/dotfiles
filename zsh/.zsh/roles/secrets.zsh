@@ -1,13 +1,16 @@
-# Resolve SOME_SECRET_SECRET_PATH variables into SOME_SECRET (actual secret values)
-for var in ${(k)parameters}; do
-  # Only variables ending with _SECRET_PATH
-  [[ "$var" == *_SECRET_PATH ]] || continue
+() {
+  setopt localoptions
 
-  secret_path="${(P)var}"
+  print -u2 "[secrets] entering, xtrace=$options[xtrace]"
 
-  if [[ -n "$secret_path" && -r "$secret_path" && "$secret_path" == /run/secrets/* ]]; then
-    base="${var%_SECRET_PATH}"
-    value="$(<"$secret_path")"
-    export "$base=$value"
-  fi
-done
+  for var in ${(k)parameters}; do
+    [[ "$var" == *_SECRET_PATH ]] || continue
+
+    secret_path="${(P)var}"
+
+    if [[ -n "$secret_path" && -r "$secret_path" && "$secret_path" == /run/secrets/* ]]; then
+      base="${var%_SECRET_PATH}"
+      print -u2 "[secrets] resolving $var -> $base from $secret_path; xtrace=$options[xtrace]"
+    fi
+  done
+}
