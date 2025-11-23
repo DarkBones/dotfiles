@@ -3,9 +3,11 @@
 alias vim='nvim'
 alias v='nvim'
 
-# TODO: Implement
-# alias cd='z'
-# alias cdi='zi'
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+  alias cd='z'
+  alias cdi='zi'
+fi
 
 if command -v eza > /dev/null 2>&1; then
   alias ls='eza'

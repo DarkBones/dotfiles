@@ -1,3 +1,5 @@
+[[ -o interactive ]] || return
+
 autoload -Uz compinit
 
 # Put any custom completion functions in $ZDOTDIR/completions
