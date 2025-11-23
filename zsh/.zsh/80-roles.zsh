@@ -1,5 +1,6 @@
 roles_dir="$ZDOTDIR/roles"
 
+# If ROLES came in as a scalar from the environment, turn it into an array
 if [[ -n "${ROLES:-}" && ${(t)ROLES} != *array* ]]; then
   ROLES=(${=ROLES})
 fi
@@ -19,6 +20,8 @@ if (( ${#ROLES} == 0 )); then
   echo "Warning: No ROLES set on this machine. Add them in inventory.nix or for this host ($HOST) in $ZDOTDIR/80-roles.zsh"
   return 0
 fi
+
+export ROLES="${(j: :)ROLES}"
 
 # Load roles that actually have a file; silently skip missing ones
 for role in "${ROLES[@]}"; do
