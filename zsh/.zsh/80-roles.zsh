@@ -8,7 +8,7 @@ host="${HOST:-$(hostname)}"
 
 case "$host" in
   dorkbones)
-    ROLES=(dev secrets)
+    ROLES=(bas dev dotfiles gaming hyprland secrets)
     ;;
 esac
 
