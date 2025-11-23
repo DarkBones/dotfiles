@@ -18,6 +18,7 @@ path_add_back() {
 # Put common dirs at the front
 path_add_front "$HOME/.local/bin"
 path_add_front "$HOME/bin"
+path_add_back "$HOME/.tmuxifier/bin"
 
 export PATH
 unset -f path_add_front path_add_back

@@ -20,10 +20,6 @@ load_theme() {
   local theme="$1"
   local theme_file="$THEME_DIR/$theme.zsh"
 
-  # Clean out old prompt hooks from pure / powerlevel10k
-  # so they don't keep drawing on top of newer prompts.
-  typeset -ga precmd_functions preexec_functions chpwd_functions
-
   # Drop any functions with these prefixes from the hook arrays
   precmd_functions=("${(@)precmd_functions:#powerlevel10k_*}")
   preexec_functions=("${(@)preexec_functions:#powerlevel10k_*}")
