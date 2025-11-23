@@ -7,10 +7,20 @@ export COLORTERM=${COLORTERM:-truecolor}
 export OS_TYPE=${OS_TYPE:-$(uname | tr '[:upper:]' '[:lower:]')}
 export MACHINE_ROLE=${MACHINE_ROLE:-personal} # personal / work / etc.
 
-# Safe HM vars
-if [ -r "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
-  . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-fi
-
 # Developer home
 export DEV_HOME=${DEV_HOME:-"$HOME/Developer"}
+
+# Safe HM vars (works on NixOS + non-Nix)
+_hm_session_vars_candidates=(
+  "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+  "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh"
+)
+
+for f in "${_hm_session_vars_candidates[@]}"; do
+  if [ -r "$f" ]; then
+    . "$f"
+    break
+  fi
+done
+
+unset _hm_session_vars_candidates
