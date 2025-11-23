@@ -8,7 +8,7 @@ setopt HIST_REDUCE_BLANKS
 setopt SHARE_HISTORY
 
 # Completion / editing niceties
-setopt AUTO_CD
+[[ -o interactive ]] && setopt AUTO_CD
 setopt AUTO_LIST
 setopt AUTO_MENU
 setopt COMPLETE_IN_WORD
