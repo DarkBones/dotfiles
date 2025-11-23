@@ -1,5 +1,4 @@
 # TODO: CLEAN UP
-
 ddump() {
     # local filename=${1:-snapshot}
     # local filepath=~/Developer/papershift/db_snapshots/$filename.dump
