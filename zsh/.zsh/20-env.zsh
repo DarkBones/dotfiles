@@ -19,8 +19,9 @@ _hm_session_vars_candidates=(
 
 for f in "${_hm_session_vars_candidates[@]}"; do
   if [ -r "$f" ]; then
-    export HM_VARS_LOADED_FROM="$f"
+    unset __HM_SESS_VARS_SOURCED
     . "$f"
+    export HM_VARS_LOADED_FROM="$f"
     break
   fi
 done
