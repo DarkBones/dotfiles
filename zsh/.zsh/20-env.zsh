@@ -14,10 +14,12 @@ export DEV_HOME=${DEV_HOME:-"$HOME/Developer"}
 _hm_session_vars_candidates=(
   "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
   "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh"
+  "/nix/var/nix/profiles/per-user/$USER/home-manager/etc/profile.d/hm-session-vars.sh"
 )
 
 for f in "${_hm_session_vars_candidates[@]}"; do
   if [ -r "$f" ]; then
+    export HM_VARS_LOADED_FROM="$f"
     . "$f"
     break
   fi
