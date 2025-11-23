@@ -1,3 +1,10 @@
+export DB_SNAPSHOT_PATH=${DB_SNAPSHOT_PATH:-"$DEV_HOME/db_snapshots"}
+
+# Ghostty
+export GHOSTTY_BIN_DIR=${GHOSTTY_BIN_DIR:-"/usr/bin"}
+export GHOSTTY_RESOURCES_DIR=${GHOSTTY_RESOURCES_DIR:-"/usr/share/ghostty"}
+export GHOSTTY_SHELL_INTEGRATION_NO_SUDO=${GHOSTTY_SHELL_INTEGRATION_NO_SUDO:-1}
+
 # TODO: CLEAN UP
 ddump() {
     # local filename=${1:-snapshot}

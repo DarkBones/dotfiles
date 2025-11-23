@@ -1,3 +1,5 @@
+export MANWIDTH=${MANWIDTH:-80}
+
 # Start tmuxifier session
 function s() {
   [ -z $1 ] && {
