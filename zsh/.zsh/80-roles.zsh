@@ -14,7 +14,7 @@ esac
 # If still empty, load ALL the role files
 if (( ${#ROLES} == 0 )); then
   echo "Warning: No ROLES set on this machine. Add them for this host ($HOST) on $ZDOTDIR/80-roles.zsh"
-  exit 0
+  # exit 0
 fi
 
 typeset -ga ROLES
