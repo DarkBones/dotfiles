@@ -21,7 +21,7 @@ if (( ${#ROLES} == 0 )); then
   return 0
 fi
 
-export ROLES="${(j: :)ROLES}"
+(( ${#ROLES[@]} )) && typeset -gx ROLES
 
 # Load roles that actually have a file; silently skip missing ones
 for role in "${ROLES[@]}"; do
