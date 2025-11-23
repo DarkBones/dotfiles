@@ -6,9 +6,6 @@ case "$host" in
   dorkbones)
     ROLES=(dev secrets)
     ;;
-  *)
-    ROLES=()
-    ;;
 esac
 
 # If still empty, load ALL the role files
