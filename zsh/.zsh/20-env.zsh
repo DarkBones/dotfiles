@@ -12,9 +12,9 @@ export DEV_HOME=${DEV_HOME:-"$HOME/Developer"}
 
 # Safe HM vars (works on NixOS + non-Nix)
 _hm_session_vars_candidates=(
-  "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
   "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh"
   "/nix/var/nix/profiles/per-user/$USER/home-manager/etc/profile.d/hm-session-vars.sh"
+  "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 )
 
 for f in "${_hm_session_vars_candidates[@]}"; do
