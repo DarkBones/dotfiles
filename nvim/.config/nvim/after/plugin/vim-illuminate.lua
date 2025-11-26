@@ -1,0 +1,16 @@
+local vil = require("illuminate")
+local wk = require("which-key")
+
+vil.configure({
+    min_count_to_highlight = 2,
+})
+
+wk.add({
+    { "<leader>ui", vil.toggle, desc = "[I]llumination Toggle Global" },
+    { "<leader>uI", vil.toggle_buf, desc = "[I]llumination Toggle Local" },
+})
+
+wk.add({
+    { "<A-n>", vil.goto_next_reference, desc = "[I]llumination Next" },
+    { "<A-p>", vil.goto_prev_reference, desc = "[I]llumination Previous" },
+})

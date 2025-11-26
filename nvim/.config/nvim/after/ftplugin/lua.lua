@@ -1,0 +1,2 @@
+-- This is just a demonstration to show that we can have lua specific stuff here
+-- vim.opt_local.formatoptions:remove "o"
