@@ -1,0 +1,126 @@
+{
+  "position": "top",
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "custom/weather",
+    "custom/disk",
+    "custom/cpu",
+    "custom/gpu",
+    "custom/memory",
+    "network",
+    "pulseaudio",
+    "custom/bluetooth",
+    "battery",
+    "custom/datetime"
+  ],
+  "clock": {
+    "format": "<span foreground='#f5c2e7'>   </span>{:%a %d %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "<span size='13000' foreground='#a6e3a1'>{icon} </span> {capacity}%",
+    "format-warning": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {capacity}%",
+    "format-critical": "<span size='13000' foreground='#E38C8F'>{icon} </span> {capacity}%",
+    "format-charging": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-plugged": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-alt": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {time}",
+    "format-full": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip-format": "{time}"
+  },
+  "network": {
+    "format-wifi": "<span size='13000' foreground='#f5e0dc'>  </span>{essid}",
+    "format-ethernet": "<span size='13000' foreground='#f5e0dc'>󰤭  </span> Disconnected",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "<span size='13000' foreground='#f5e0dc'>  </span>Disconnected",
+    "tooltip-format-wifi": "Signal Strenght: {signalStrength}%"
+  },
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", " "]
+    },
+    "on-click": "pavucontrol"
+  },
+  "custom/cpu": {
+    "exec": "~/.config/waybar/scripts/cpu_monitor.sh",
+    "format": "<span foreground='#89b4fa'> {}  </span>",  // Catppuccin blue
+    "interval": 5,
+    "tooltip": true,
+    "return-type": "json"
+  },
+  "custom/gpu": {
+    "exec": "~/.config/waybar/scripts/gpu_monitor.sh",
+    "format": "<span foreground='#f5c2e7'>󰢮 {}  </span>",  // Catppuccin pink
+    "interval": 5,
+    "tooltip": true,
+    "return-type": "json"
+  },
+  "custom/memory": {
+    "exec": "~/.config/waybar/scripts/memory_monitor.sh",
+    "format": "<span foreground='#fab387'>󰍛 {}</span>",  // Catppuccin peach
+    "interval": 5,
+    "tooltip": true,
+    "return-type": "json"
+  },
+  "custom/datetime": {
+    "exec": "~/.config/waybar/scripts/datetime_monitor.sh",
+    "format": "<span foreground='#f5c2e7'>{}</span>",
+    "interval": 1,
+    "return-type": "json",
+    "tooltip": true,
+    "on-click": "gnome-calendar"
+  },
+  "custom/bluetooth": {
+    "format": "<span foreground='#89dceb'>{} </span>",  // Catppuccin sky color
+    "on-click": "blueman-manager",
+    "exec": "~/.config/waybar/scripts/bluetooth_monitor.sh",
+    "interval": 5,
+    "return-type": "json",
+    "tooltip": true
+  },
+  "hyprland/workspaces": {
+    "all-outputs": true,
+    "active-only": false,
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "format": "{name}",
+    "persistent_workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": [],
+      "7": [],
+      "8": [],
+      "9": [],
+      "10": []
+    },
+    "sort-by-number": true
+  },
+  "custom/disk": {
+    "exec": "~/.config/waybar/scripts/disk_monitor.sh",
+    "interval": 60,
+    "format": "{}",
+    "return-type": "json",
+    "tooltip": true
+  },
+  "custom/weather": {
+    "exec": "~/.config/waybar/scripts/weather_monitor.sh",
+    "interval": 300,
+    "return-type": "json",
+    "format": "{}",
+    "tooltip": true
+  }
+}
