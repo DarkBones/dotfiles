@@ -1,0 +1,20 @@
+# This is Git's per-user configuration file.
+[user]
+	name = DarkBones
+	email = 23454780+DarkBones@users.noreply.github.com
+	name = DarkBones
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[alias]
+	staash = stash --all
+[rebase]
+	updateRefs = true
