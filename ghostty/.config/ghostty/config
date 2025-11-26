@@ -1,0 +1,6 @@
+mouse-hide-while-typing = true
+background-opacity = 0.95
+window-decoration = false
+gtk-titlebar = false
+confirm-close-surface = false
+font-size = 10
