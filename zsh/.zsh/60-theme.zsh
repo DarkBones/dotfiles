@@ -37,6 +37,7 @@ load_theme() {
   fi
 }
 
+# TOFIX: Theme doesn't persist on rpi4
 persist_theme() {
   local theme="$1"
   print -r -- "$theme" >| "$THEME_STATE_FILE"
