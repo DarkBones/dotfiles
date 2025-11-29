@@ -54,20 +54,6 @@ end
 
 vim.o.winbar = "%{%v:lua.get_relative_filepath()%}"
 
-local wk = require("which-key")
-
--- Center cursor when C-u and C-d-ing
-vim.api.nvim_set_keymap("n", "<c-u>", "<c-u>zz", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<c-d>", "<c-d>zz", { noremap = true, silent = true })
-
-wk.add({
-    { "<leader>mm", "<cmd>messages<CR>", desc = "Show Messages" },
-    { "<leader>s", group = "Source" },
-    { "<leader>sf", "<cmd>source %<CR>", desc = "current file" },
-    { "<leader>qn", "<cmd>cnext<CR>zz", desc = "Next quickfix item" },
-    { "<leader>qp", "<cmd>cprev<CR>zz", desc = "Previous quickfix item" },
-})
-=======
 local map = vim.keymap.set
 
 -- Center cursor when C-u and C-d-ing
@@ -79,7 +65,6 @@ map("n", "<leader>qn", "<cmd>cnext<CR>zz", { desc = "Next quickfix item" })
 map("n", "<leader>qp", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item" })
 
 map("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
->>>>>>> eb947f0 (Add configs)
 
 vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
 
@@ -98,7 +83,3 @@ vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave", "FocusLost" }, {
         vim.opt_local.colorcolumn = ""
     end,
 })
-
-vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
-=======
->>>>>>> eb947f0 (Add configs)

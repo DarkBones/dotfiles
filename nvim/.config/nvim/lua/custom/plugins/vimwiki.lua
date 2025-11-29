@@ -2,9 +2,6 @@ return {
     "vimwiki/vimwiki",
     dependencies = {
         "tpope/vim-markdown",
-        "folke/which-key.nvim",
-=======
->>>>>>> eb947f0 (Add configs)
     },
     init = function()
         vim.g.vimwiki_list = {

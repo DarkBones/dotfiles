@@ -60,56 +60,6 @@ local function search_symbol_under_cursor()
     })
 end
 
-local wk = require("which-key")
-
-wk.add({
-    {
-        "<C-p>",
-        function()
-            local opts = {
-                file_ignore_patterns = {
-                    ".git/",
-                    "virtualenvs/",
-                    "node_modules/",
-                    "__pycache__/",
-                    "*.log",
-                    "*.tmp",
-                    "*.swp",
-                    "*.swo",
-                    "dist/",
-                    "build/",
-                    "target/",
-                    ".DS_Store",
-                },
-                hidden = is_dotfiles_repo(),
-            }
-
-            builtin.find_files(opts)
-        end,
-        desc = "Find Files",
-    },
-}, { mode = "n" })
-
-wk.add({
-    {
-        "<leader>fa",
-        function()
-            require("telescope").extensions.live_grep_args.live_grep_args()
-        end,
-        desc = "Grep Args",
-    },
-    { "<leader>fb", telescope_with_hidden(builtin.buffers), desc = "List Buffers" },
-    { "<leader>fd", telescope_with_hidden(builtin.lsp_document_symbols), desc = "List LSP Document Symbols" },
-    { "<leader>fg", telescope_with_hidden(builtin.live_grep), desc = "Live Grep" },
-    { "<leader>fh", telescope_with_hidden(builtin.help_tags), desc = "Help Tags" },
-    { "<leader>fj", telescope_with_hidden(builtin.jumplist), desc = "Jump List" },
-    { "<leader>fm", telescope_with_hidden(builtin.marks), desc = "Marks" },
-    { "<leader>fp", search_partial_word, desc = "Grep Partial Word" },
-    { "<leader>fs", search_symbol_under_cursor, desc = "Grep Symbol" },
-    { "<leader>ft", telescope_with_hidden(builtin.git_status), desc = "Git Status" },
-    { "<leader>fw", telescope_with_hidden(grep_word_under_cursor), desc = "Grep Word" },
-})
-=======
 local map = vim.keymap.set
 
 map("n", "<C-p>", function()
@@ -147,7 +97,6 @@ map("n", "<leader>fp", search_partial_word, { desc = "Grep Partial Word" })
 map("n", "<leader>fs", search_symbol_under_cursor, { desc = "Grep Symbol" })
 map("n", "<leader>ft", telescope_with_hidden(builtin.git_status), { desc = "Git Status" })
 map("n", "<leader>fw", telescope_with_hidden(grep_word_under_cursor), { desc = "Grep Word" })
->>>>>>> eb947f0 (Add configs)
 
 local actions = require("telescope.actions")
 telescope.setup({

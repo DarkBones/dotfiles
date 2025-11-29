@@ -4,8 +4,5 @@ return {
     "DarkBones/TreeFiddyGit",
     dependencies = {
         "nvim-telescope/telescope.nvim",
-        "folke/which-key.nvim",
-=======
->>>>>>> eb947f0 (Add configs)
     },
 }

@@ -1,20 +1,9 @@
 return {
     {
         "tpope/vim-fugitive",
-        depencencies = {
-            "folke/which-key.nvim",
-        },
     },
     {
         "lewis6991/gitsigns.nvim",
-        dependencies = {
-            "folke/which-key.nvim",
-        },
-=======
-    },
-    {
-        "lewis6991/gitsigns.nvim",
->>>>>>> eb947f0 (Add configs)
     },
     {
         "aaronhallaert/advanced-git-search.nvim",
@@ -23,9 +12,6 @@ return {
             "nvim-telescope/telescope.nvim",
             "tpope/vim-fugitive",
             "tpope/vim-rhubarb",
-            "folke/which-key.nvim",
-=======
->>>>>>> eb947f0 (Add configs)
         },
     },
 }

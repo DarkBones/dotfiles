@@ -62,21 +62,6 @@ dap.configurations.go = {
     },
 }
 
--- Key mappings for nvim-dap
-vim.api.nvim_set_keymap("n", "<leader>dc", ':lua require"dap".continue()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap(
-    "n",
-    "<leader>dt",
-    ':lua require"dap".toggle_breakpoint()<CR>',
-    { noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-    "n",
-    "<leader>dd",
-    ':lua require"dap".disconnect({ terminateDebuggee = false })<CR>',
-    { noremap = true, silent = true }
-)
-=======
 local map = vim.keymap.set
 map("n", "<leader>dc", function()
     require("dap").continue()
@@ -87,4 +72,3 @@ end, { desc = "Debug: Toggle Breakpoint" })
 map("n", "<leader>dd", function()
     require("dap").disconnect({ terminateDebuggee = false })
 end, { desc = "Debug: Disconnect" })
->>>>>>> eb947f0 (Add configs)
