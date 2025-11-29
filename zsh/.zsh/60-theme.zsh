@@ -2,7 +2,11 @@
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 THEME_DIR="$ZDOTDIR/themes"
-THEME_STATE_FILE="${ZDOTDIR:-$HOME}/.current_theme"
+
+# Store theme choice in a writable state dir, not inside Nix-managed dotfiles
+: "${XDG_STATE_HOME:="${HOME}/.local/state"}"
+THEME_STATE_FILE="${XDG_STATE_HOME}/zsh/current_theme"
+THEME_STATE_DIR="${THEME_STATE_FILE:h}"
 
 # --- Resolve PROMPT_THEME on startup -----------------------------------------
 
@@ -37,10 +41,18 @@ load_theme() {
   fi
 }
 
-# TOFIX: Theme doesn't persist on rpi4
 persist_theme() {
   local theme="$1"
-  print -r -- "$theme" >| "$THEME_STATE_FILE"
+
+  mkdir -p "$THEME_STATE_DIR" 2>/dev/null || {
+    echo "⚠️  Could not create theme state dir: $THEME_STATE_DIR" >&2
+    return 1
+  }
+
+  if ! print -r -- "$theme" >| "$THEME_STATE_FILE"; then
+    echo "⚠️  Failed to write theme state to $THEME_STATE_FILE" >&2
+    return 1
+  fi
 }
 
 _theme_fzf_select() {
@@ -75,25 +87,20 @@ change-theme() {
   fi
 
   PROMPT_THEME="$theme"
-  persist_theme "$theme"
+  persist_theme "$theme" || return 1
 
   # Load new prompt definitions
   load_theme "$theme"
 
   # --- Fix multiline prompt duplication ---
-  # Only call ZLE functions inside interactive ZLE context
   if [[ -o interactive ]]; then
-    # Reset completion/prompt widgets
     autoload -Uz promptinit
     promptinit
 
-    # Force repaint without ghost lines
     if [[ -n "$ZLE" ]]; then
       zle .reset-prompt
       zle -R
     else
-      # Not inside a widget (e.g. after Enter)
-      # Cleanly redraw prompt
       print -r -- ""
     fi
   fi
