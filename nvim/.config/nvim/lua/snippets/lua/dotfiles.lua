@@ -15,6 +15,7 @@ local function dependencies_choice(position)
             t({
                 "",
                 "    dependencies = {",
+<<<<<<< HEAD
                 '        "folke/which-key.nvim"',
                 "    },",
             }),

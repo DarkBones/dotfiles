@@ -1,4 +1,7 @@
 local wk = require("which-key")
+=======
+local map = vim.keymap.set
+>>>>>>> eb947f0 (Add configs)
 
 local function yank_whole_file(include_ticks)
     local ft = vim.bo.filetype
@@ -74,3 +77,16 @@ wk.add({
     { "<leader>c", '"_c', desc = "Change without overwriting clipboard", mode = "v" },
     { "<leader>d", '"_d', desc = "Delete without overwriting clipboard", mode = "v" },
 })
+=======
+map("n", "y.", yank_file_path, { desc = "Yank current filepath" })
+map("n", "y,", yank_absolute_file_path, { desc = "Yank current absolute filepath" })
+map("n", "<leader>y.", function()
+    yank_whole_file(true)
+end, { desc = "Yank whole file for sharing" })
+map("n", "<leader>y,", function()
+    yank_whole_file(false)
+end, { desc = "Yank whole file for sharing" })
+map("v", "<leader>p", '"_dP', { desc = "Paste without overwriting clipboard" })
+map("v", "<leader>c", '"_c', { desc = "Change without overwriting clipboard" })
+map("v", "<leader>d", '"_d', { desc = "Delete without overwriting clipboard" })
+>>>>>>> eb947f0 (Add configs)

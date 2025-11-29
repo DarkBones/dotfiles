@@ -1,5 +1,5 @@
 local cp = require("CopilotChat")
-local wk = require("which-key")
+local map = vim.keymap.set
 
 cp.setup({
     question_header = "💀 DarkBones ",
@@ -33,3 +33,4 @@ cp.setup({
 wk.add({
     { "<leader>ac", "<cmd>CopilotChatToggle<CR>", desc = "Open Copilot Chat", mode = { "n", "v" } },
 })
+map({ "n", "v" }, "<leader>ac", "<cmd>CopilotChatToggle<CR>", { desc = "Open Copilot Chat" })

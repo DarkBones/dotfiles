@@ -5,6 +5,8 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "folke/which-key.nvim",
+=======
+>>>>>>> eb947f0 (Add configs)
             "nvim-telescope/telescope-live-grep-args.nvim",
         },
     },

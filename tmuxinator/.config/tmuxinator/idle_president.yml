@@ -1,0 +1,18 @@
+# /Users/Bas/.config/tmuxinator/idle_president.yml
+
+name: idle-president
+root: ~/Developer/idle-president
+
+windows:
+  - vim:
+      layout: main-horizontal-mirrored
+      panes:
+        -
+        - v
+
+  - zsh:
+  - lazygit: lazygit
+
+  - wiki:
+    panes:
+      - v ~/vimwiki/personal/Idle\ President\ Game\ Concept.wiki

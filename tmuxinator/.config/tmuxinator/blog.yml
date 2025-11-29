@@ -1,0 +1,14 @@
+# /Users/Bas/.config/tmuxinator/blog.yml
+
+name: blog
+root: ~/Developer/dakbones.dev
+
+windows:
+  - vim:
+      layout: main-horizontal-mirrored
+      panes:
+        -
+        - v
+  - hugo:
+      panes:
+        - hugo server -D

@@ -10,6 +10,11 @@ return {
         dependencies = {
             "folke/which-key.nvim",
         },
+=======
+    },
+    {
+        "lewis6991/gitsigns.nvim",
+>>>>>>> eb947f0 (Add configs)
     },
     {
         "aaronhallaert/advanced-git-search.nvim",
@@ -19,6 +24,8 @@ return {
             "tpope/vim-fugitive",
             "tpope/vim-rhubarb",
             "folke/which-key.nvim",
+=======
+>>>>>>> eb947f0 (Add configs)
         },
     },
 }

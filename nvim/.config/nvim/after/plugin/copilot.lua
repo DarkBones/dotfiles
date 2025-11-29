@@ -21,3 +21,4 @@ vim.g.copilot_enabled = false
 -- wk.add({
 --     { "<leader>cp", toggle_copilot, desc = "Toggle Copilot", icon = { icon = "󰚩", color = "red" } },
 -- })
+vim.g.copilot_enabled = false

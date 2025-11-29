@@ -67,6 +67,19 @@ wk.add({
     { "<leader>qn", "<cmd>cnext<CR>zz", desc = "Next quickfix item" },
     { "<leader>qp", "<cmd>cprev<CR>zz", desc = "Previous quickfix item" },
 })
+=======
+local map = vim.keymap.set
+
+-- Center cursor when C-u and C-d-ing
+map("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
+map("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
+map("n", "<leader>mm", "<cmd>messages<CR>", { desc = "Show Messages" })
+map("n", "<leader>sf", "<cmd>source %<CR>", { desc = "Source current file" })
+map("n", "<leader>qn", "<cmd>cnext<CR>zz", { desc = "Next quickfix item" })
+map("n", "<leader>qp", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item" })
+
+map("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
+>>>>>>> eb947f0 (Add configs)
 
 vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
 
@@ -87,3 +100,5 @@ vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave", "FocusLost" }, {
 })
 
 vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
+=======
+>>>>>>> eb947f0 (Add configs)

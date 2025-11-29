@@ -12,7 +12,7 @@ if [[ -z "${PROMPT_THEME:-}" ]] && [[ -f "$THEME_STATE_FILE" ]]; then
 fi
 
 # Fallback default
-PROMPT_THEME="${PROMPT_THEME:-p10k}"
+PROMPT_THEME="${PROMPT_THEME:-starship}"
 
 # --- Helpers ------------------------------------------------------------------
 

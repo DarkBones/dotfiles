@@ -109,6 +109,45 @@ wk.add({
     { "<leader>ft", telescope_with_hidden(builtin.git_status), desc = "Git Status" },
     { "<leader>fw", telescope_with_hidden(grep_word_under_cursor), desc = "Grep Word" },
 })
+=======
+local map = vim.keymap.set
+
+map("n", "<C-p>", function()
+    local opts = {
+        file_ignore_patterns = {
+            ".git/",
+            "virtualenvs/",
+            "node_modules/",
+            "__pycache__/",
+            "*.log",
+            "*.tmp",
+            "*.swp",
+            "*.swo",
+            "dist/",
+            "build/",
+            "target/",
+            ".DS_Store",
+        },
+        hidden = is_dotfiles_repo(),
+    }
+
+    builtin.find_files(opts)
+end, { desc = "Find Files" })
+
+map("n", "<leader>fa", function()
+    require("telescope").extensions.live_grep_args.live_grep_args()
+end, { desc = "Grep Args" })
+map("n", "<leader>fb", telescope_with_hidden(builtin.buffers), { desc = "List Buffers" })
+map("n", "<leader>fd", telescope_with_hidden(builtin.lsp_document_symbols), { desc = "List LSP Document Symbols" })
+map("n", "<leader>fg", telescope_with_hidden(builtin.live_grep), { desc = "Live Grep" })
+map("n", "<leader>fh", telescope_with_hidden(builtin.help_tags), { desc = "Help Tags" })
+map("n", "<leader>fj", telescope_with_hidden(builtin.jumplist), { desc = "Jump List" })
+map("n", "<leader>fm", telescope_with_hidden(builtin.marks), { desc = "Marks" })
+map("n", "<leader>fp", search_partial_word, { desc = "Grep Partial Word" })
+map("n", "<leader>fs", search_symbol_under_cursor, { desc = "Grep Symbol" })
+map("n", "<leader>ft", telescope_with_hidden(builtin.git_status), { desc = "Git Status" })
+map("n", "<leader>fw", telescope_with_hidden(grep_word_under_cursor), { desc = "Grep Word" })
+>>>>>>> eb947f0 (Add configs)
 
 local actions = require("telescope.actions")
 telescope.setup({

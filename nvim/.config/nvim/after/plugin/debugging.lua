@@ -76,3 +76,15 @@ vim.api.nvim_set_keymap(
     ':lua require"dap".disconnect({ terminateDebuggee = false })<CR>',
     { noremap = true, silent = true }
 )
+=======
+local map = vim.keymap.set
+map("n", "<leader>dc", function()
+    require("dap").continue()
+end, { desc = "Debug: Continue" })
+map("n", "<leader>dt", function()
+    require("dap").toggle_breakpoint()
+end, { desc = "Debug: Toggle Breakpoint" })
+map("n", "<leader>dd", function()
+    require("dap").disconnect({ terminateDebuggee = false })
+end, { desc = "Debug: Disconnect" })
+>>>>>>> eb947f0 (Add configs)

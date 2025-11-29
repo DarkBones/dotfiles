@@ -1,0 +1,25 @@
+# /Users/Bas/.config/tmuxinator/ps_pulse.yml
+
+name: ps_pulse
+root: ~/Developer/papershift/pulse
+
+windows:
+  - vim:
+      layout: main-horizontal-mirrored
+      panes:
+        -
+        - v
+  - server:
+      layout: tiled
+      panes:
+        - backend:
+            - COMPOSE_FILE=docker-compose.yml:$HOME/Developer/papershift/pulse-compose.yml docker-compose up --watch --menu=false
+        - hub:
+            - cd hub && pnpm dev
+        - vue:
+            - cd frontend && pnpm dev
+        - sst-dev:
+            - cd hub && pnpm sst-dev
+  - zsh:
+  - lazygit: lazygit
+  - db: # TODO: Fix dadbod bootstrap

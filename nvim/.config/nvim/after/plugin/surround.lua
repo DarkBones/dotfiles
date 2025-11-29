@@ -9,5 +9,14 @@ require("nvim-surround").setup({
         change = "<leader>sc",
         delete = "<leader>sd",
         change_line = "<leader>sC",
+=======
+
+        delete = "<leader>sd",
+        change = "<leader>sc",
+        change_line = "<leader>sC",
+
+        visual = "<leader>sa",
+        visual_line = "gS",
+>>>>>>> eb947f0 (Add configs)
     },
 })

@@ -14,6 +14,9 @@ end
 vim.g.mapleader = " "
 vim.opt.rtp:prepend(lazypath)
 
+-- TODO: Find permanent fix
+pcall(require, "custom.clipboard")
+
 require("lazy").setup({
     { import = "custom/plugins" },
 }, {

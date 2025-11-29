@@ -5,6 +5,9 @@ return {
     },
     config = function()
         local wk = require("which-key")
+=======
+    config = function()
+>>>>>>> eb947f0 (Add configs)
         local session_dir = vim.fn.expand("~/.dotfiles/vim-sessions")
 
         vim.fn.mkdir(session_dir, "p")
@@ -24,5 +27,10 @@ return {
             { "<leader>os", save_session,      desc = "Save session" },
             { "<leader>od", ":Obsession!<CR>", desc = "Delete session" },
         })
+=======
+        vim.keymap.set("n", "<leader>ol", load_session, { desc = "Load session" })
+        vim.keymap.set("n", "<leader>os", save_session, { desc = "Save session" })
+        vim.keymap.set("n", "<leader>od", ":Obsession!<CR>", { desc = "Delete session" })
+>>>>>>> eb947f0 (Add configs)
     end,
 }

@@ -1,0 +1,12 @@
+# /Users/Bas/.config/tmuxinator/dotfiles.yml
+
+name: dotfiles-new
+root: ~/Developer/.dotfiles
+
+windows:
+  - vim:
+      layout: main-horizontal
+      panes:
+        - v
+        -
+  - server:

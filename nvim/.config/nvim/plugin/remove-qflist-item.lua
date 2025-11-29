@@ -1,5 +1,8 @@
 -- Function to remove the current quickfix entry
 function RemoveCurrentQfEntry()
+=======
+local function remove_current_qf_entry()
+>>>>>>> eb947f0 (Add configs)
     -- Get the current quickfix list
     local qf_list = vim.fn.getqflist()
     -- Get the current line in the quickfix window (1-based index)
@@ -32,5 +35,13 @@ vim.api.nvim_create_autocmd("FileType", {
             ":lua RemoveCurrentQfEntry()<CR>",
             { noremap = true, silent = true }
         )
+=======
+    callback = function(event)
+        vim.keymap.set("n", "<C-d>", remove_current_qf_entry, {
+            buffer = event.buf,
+            silent = true,
+            desc = "Remove item from Quickfix",
+        })
+>>>>>>> eb947f0 (Add configs)
     end,
 })

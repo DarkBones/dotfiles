@@ -2,6 +2,8 @@ return {
     {
         "github/copilot.vim",
         dependencies = { "folke/which-key.nvim" },
+=======
+>>>>>>> eb947f0 (Add configs)
     },
     {
         {
@@ -11,6 +13,8 @@ return {
                 { "github/copilot.vim" },
                 { "nvim-lua/plenary.nvim" },
                 { "folke/which-key.nvim" },
+=======
+>>>>>>> eb947f0 (Add configs)
             },
         },
     },

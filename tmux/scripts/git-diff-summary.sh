@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+dir="${1:-.}"
+
+cd "$dir" 2>/dev/null || exit 0
+
+# Only do anything inside a git work tree
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    exit 0
+fi
+
+# Combine unstaged + staged changes and sum additions/deletions
+{
+    git diff --numstat 2>/dev/null
+    git diff --numstat --cached 2>/dev/null
+} | awk '
+  NF >= 2 {
+    add = $1
+    del = $2
+    if (add != "-") a += add
+    if (del != "-") d += del
+  }
+  END {
+    if (a + d > 0)
+      printf "+%d -%d", a, d
+  }
+'
