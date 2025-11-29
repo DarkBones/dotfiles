@@ -30,7 +30,4 @@ cp.setup({
     },
 })
 
-wk.add({
-    { "<leader>ac", "<cmd>CopilotChatToggle<CR>", desc = "Open Copilot Chat", mode = { "n", "v" } },
-})
 map({ "n", "v" }, "<leader>ac", "<cmd>CopilotChatToggle<CR>", { desc = "Open Copilot Chat" })
