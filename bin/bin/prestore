@@ -1,0 +1,60 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+source "$(dirname "${BASH_SOURCE[0]}")/_drestore_utils.sh"
+
+snapshot_dir=$(get_snapshot_dir)
+load_drestore_config "$snapshot_dir"
+echo "DIR: $snapshot_dir"
+
+# Choose snapshot base name (no .dump). If omitted, fzf over available sets.
+if [ $# -ge 1 ]; then
+  snapshot="$1"
+else
+  snapshot=$(find "$snapshot_dir" -type f -name "*.dump" \
+    -exec basename {} \; | sed -E 's/\.[^.]+\.dump$//' | sort -u | \
+    fzf --prompt="Select snapshot set: ") || exit 1
+fi
+
+echo "Restoring snapshot set '$snapshot' to $DB_HOST:$DB_PORT as $DB_USER"
+
+echo "Using pg_restore: $PG_RESTORE_BIN"
+"$PG_RESTORE_BIN" --version
+
+for dump_path in "$snapshot_dir"/"$snapshot".*.dump; do
+  base=$(basename "$dump_path")
+  db="${base#${snapshot}.}"
+  db="${db%.dump}"
+
+  echo "Restoring DB: $db"
+  echo "  Dropping non-excluded tables in schema '$DB_SCHEMA'…"
+  PGPASSWORD="$DB_PASSWORD" psql -U "$DB_USER" -h "$DB_HOST" -d "$db" -p "$DB_PORT" -v "ON_ERROR_STOP=1" -c "
+    DO \$\$
+    DECLARE r RECORD;
+    BEGIN
+      FOR r IN (
+        SELECT tablename
+        FROM pg_tables
+        WHERE schemaname = '$DB_SCHEMA'
+          AND tablename NOT IN ($(excluded_clause))
+      ) LOOP
+        EXECUTE 'DROP TABLE IF EXISTS ' || quote_ident(r.tablename) || ' CASCADE';
+      END LOOP;
+    END \$\$;"
+
+  echo " │ Restoring from $base..."
+  set +e
+  PGPASSWORD="$DB_PASSWORD" "$PG_RESTORE_BIN" \
+    -U "$DB_USER" -h "$DB_HOST" -d "$db" -p "$DB_PORT" -v "$dump_path"
+  restore_status=$?
+  set -e
+
+  if [ "$restore_status" -ne 0 ]; then
+    echo " │ ⚠️  pg_restore reported warnings (exit $restore_status) for $db"
+  else
+    echo " │ ✅ $db restored"
+  fi
+done
+
+echo "✅ All databases restored for snapshot '$snapshot'"
+

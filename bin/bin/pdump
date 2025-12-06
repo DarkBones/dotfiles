@@ -1,0 +1,44 @@
+#!/usr/bin/env zsh
+set -eu
+
+. "$(dirname "$0")/_pgrestore_utils"
+
+[ $# -ge 1 ] || {
+    echo "Usage: $(basename "$0") <snapshot_name>"
+    exit 1
+}
+
+snapshot="$1"
+
+snapshot_dir=$(get_snapshot_dir)
+load_drestore_config "$snapshot_dir"
+
+echo "Using pg_dump: $PG_DUMP_BIN"
+"$PG_DUMP_BIN" --version
+
+for db in $DB_NAMES; do
+    filename="$snapshot.$db.dump"
+    filepath="$snapshot_dir/$filename"
+
+    if [ -f "$filepath" ]; then
+        printf "%s exists. Overwrite? (y/n): " "$filepath"
+        read confirm
+        case "$confirm" in
+        [yY]) : ;;
+        *)
+            echo "Aborting."
+            exit 1
+            ;;
+        esac
+    fi
+
+    echo "Creating snapshot for DB '$db': $filepath"
+
+    PGPASSWORD="$DB_PASSWORD" "$PG_DUMP_BIN" \
+        -U "$DB_USER" \
+        -h "$DB_HOST" \
+        -d "$db" \
+        -F c -b -v -f "$filepath"
+
+    echo "✅ Snapshot saved: $filepath"
+done

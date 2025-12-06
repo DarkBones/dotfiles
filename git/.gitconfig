@@ -18,5 +18,3 @@
 	staash = stash --all
 [rebase]
 	updateRefs = true
-[rebase]
-	updateRefs = true

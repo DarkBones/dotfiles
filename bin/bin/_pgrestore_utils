@@ -1,0 +1,38 @@
+#!/usr/bin/env zsh
+get_snapshot_dir() {
+    local repo_name
+    repo_name=$(basename "$(git config --get remote.origin.url)" .git | sed 's/^\.//')
+    local snapshot_dir="$DEV_HOME/db_snapshots/$repo_name"
+
+    mkdir -p "$snapshot_dir"
+    echo "$snapshot_dir"
+}
+
+load_drestore_config() {
+    local snapshot_dir="$1"
+    local config_file="$snapshot_dir/config.env"
+
+    # Defaults – can be overridden by config.env
+    DB_PASSWORD="${DB_PASSWORD:-password}"
+    EXCLUDED_TABLES="${EXCLUDED_TABLES:-sessions}"
+    DB_USER="${DB_USER:-postgres}"
+    DB_SCHEMA="${DB_SCHEMA:-public}"
+    DB_HOST="${DB_HOST:-127.0.0.1}"
+    DB_PORT="${DB_PORT:-5432}"
+    DB_NAME="${DB_NAME:-postgres}"
+
+    # Client binaries – defaults, overridable
+    PG_DUMP_BIN="${PG_DUMP_BIN:-pg_dump}"
+    PG_RESTORE_BIN="${PG_RESTORE_BIN:-pg_restore}"
+
+    # Allow overrides from config.env
+    [ -f "$config_file" ] && source "$config_file"
+
+    # Re-assert defaults in case config.env didn’t mention them
+    PG_DUMP_BIN="${PG_DUMP_BIN:-pg_dump}"
+    PG_RESTORE_BIN="${PG_RESTORE_BIN:-pg_restore}"
+}
+
+excluded_clause() {
+    printf "'%s'," $EXCLUDED_TABLES | sed 's/,$//'
+}
