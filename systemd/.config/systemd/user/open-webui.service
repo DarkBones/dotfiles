@@ -1,0 +1,23 @@
+[Unit]
+Description=Open WebUI for Ollama
+After=ollama.service
+BindsTo=ollama.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker network create ai-network
+ExecStart=/usr/bin/docker run --rm \
+    --network=ai-network \
+    -e OLLAMA_BASE_URL=http://ollama:11434 \
+    -e PORT=4080 \
+    -p 4080:4080 \
+    -v /mnt/SnapIgnore/AI/ollama/conversations:/app/backend/data \
+    --name open-webui \
+    ghcr.io/open-webui/open-webui:main
+ExecStop=/usr/bin/docker stop open-webui
+ExecStopPost=/usr/bin/docker rm open-webui
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

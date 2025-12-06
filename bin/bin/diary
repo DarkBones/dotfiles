@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+# Default context is personal unless specified
+CONTEXT=${1:-personal}
+DIARY_PATH="$HOME/vimwiki/diary/$CONTEXT"
+TODAY=$(date +%Y-%m-%d)
+TODAY_FILE="$DIARY_PATH/$TODAY.md"
+WINDOW_NAME="Diary $CONTEXT"
+
+# Find the most recent diary file before today
+LAST_FILE=$(find "$DIARY_PATH" -type f -name '*.md' ! -name "$TODAY.md" -print0 | \
+            xargs -0 ls -t | head -1)
+
+# Check if a tmux window named "Diary $CONTEXT" already exists
+if tmux list-windows -F '#W' | grep -qx "$WINDOW_NAME"; then
+    # Select the window named "Diary $CONTEXT"
+    tmux select-window -t "$WINDOW_NAME"
+else
+    # Create a new tmux window named "Diary $CONTEXT"
+    tmux new-window -n "$WINDOW_NAME"
+    tmux send-keys -t "$WINDOW_NAME" "cd $DIARY_PATH; clear" C-m
+    tmux send-keys -t "$WINDOW_NAME" "vim '$TODAY_FILE'" C-m
+
+    # Split the window horizontally and open the last diary file in the new pane
+    tmux split-window -h -t "$WINDOW_NAME"
+    tmux send-keys -t "$WINDOW_NAME" "cd $DIARY_PATH; clear" C-m
+    tmux send-keys -t "$WINDOW_NAME" "vim '$LAST_FILE'" C-m
+
+    # Select the left pane to start
+    tmux select-pane -t 1
+fi
+

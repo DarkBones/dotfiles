@@ -1,0 +1,12 @@
+[Unit]
+Description=qBittorrent
+
+[Service]
+ExecStart=qbittorrent-nox
+ExecStop=pkill qbittorrent-nox
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

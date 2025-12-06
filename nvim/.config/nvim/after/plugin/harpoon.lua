@@ -13,17 +13,23 @@ harpoon:setup({
     },
 })
 
+local map = vim.keymap.set
+
+-- Telescope bits
 local conf = require("telescope.config").values
-local function toggle_telescope(harpoon_files)
+local pickers = require("telescope.pickers")
+local finders = require("telescope.finders")
+
+local function toggle_telescope(harpoon_list)
     local file_paths = {}
-    for _, item in ipairs(harpoon_files.items) do
+    for _, item in ipairs(harpoon_list.items) do
         table.insert(file_paths, item.value)
     end
 
-    require("telescope.pickers")
+    pickers
         .new({}, {
             prompt_title = "Harpoon",
-            finder = require("telescope.finders").new_table({
+            finder = finders.new_table({
                 results = file_paths,
             }),
             previewer = conf.file_previewer({}),
@@ -32,14 +38,22 @@ local function toggle_telescope(harpoon_files)
         :find()
 end
 
-local map = vim.keymap.set
+-- 🔧 Editable Harpoon menu (normal buffer: dd to delete, etc.)
+map("n", "<leader>hm", function()
+    harpoon.ui:toggle_quick_menu(harpoon:list())
+end, { desc = "Harpoon: Quick menu (edit list)" })
 
+-- Add current file
 map("n", "<leader>ha", function()
     harpoon:list():add()
-end, { desc = "Add current file to Harpoon" })
+end, { desc = "Harpoon: Add current file" })
+
+-- Telescope selector
 map("n", "<C-e>", function()
     toggle_telescope(harpoon:list())
-end, { desc = "Open Harpoon window" })
+end, { desc = "Harpoon: Telescope menu" })
+
+-- Direct jumps
 map("n", "<leader>hh", function()
     harpoon:list():select(1)
 end, { desc = "Harpoon: Goto File 1" })

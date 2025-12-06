@@ -1,0 +1,15 @@
+[Unit]
+Description=Supabase
+After=docker.service
+BindsTo=default.target
+
+[Service]
+ExecStartPre=-/usr/bin/docker network create ai-network || true
+ExecStart=/usr/bin/docker compose -f %h/Apps/supabase/docker/docker-compose.yml up
+ExecStop=/usr/bin/docker compose -f %h/Apps/supabase/docker/docker-compose.yml down
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

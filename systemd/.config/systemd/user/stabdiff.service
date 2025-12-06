@@ -1,0 +1,13 @@
+[Unit]
+Description=Stable Diffusion Web UI
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/mnt/SnapIgnore/AI/start-stabdiff.sh
+WorkingDirectory=/mnt/SnapIgnore/AI/stablediff
+User=bas
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

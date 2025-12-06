@@ -1,0 +1,21 @@
+[Unit]
+Description=Ollama AI Model Server
+After=default.target
+BindsTo=default.target
+
+[Service]
+ExecStartPre=-/usr/bin/docker network create ai-network
+ExecStart=/usr/bin/docker run --rm \
+    --network=ai-network \
+    --name ollama \
+    -v ollama_models:/root/.ollama/models \
+    -p 11434:11434 \
+    ollama/ollama:latest
+ExecStop=/usr/bin/docker stop ollama
+ExecStopPost=/usr/bin/docker rm ollama
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

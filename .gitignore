@@ -1,2 +1,40 @@
+# ===================================================================
+# General Exclusions
+# ===================================================================
+
+**.log
+*~
+*.swp
+*.swo
 *.zcompdump
-export.txt
+
+**/export.txt
+
+.DS_Store
+
+__pycache__/
+*.pyc
+
+# ===================================================================
+# Application Specific
+# ===================================================================
+
+calcurse/*
+!calcurse/caldav/
+
+zsh/.zsh/local_env.zsh
+
+zen/installs.ini
+zen/profiles.ini
+zen/*/**
+!zen/*/chrome/
+!zen/*/user.js
+!zen/*/containers.json
+!zen/*/handlers.json
+!zen/*/permissions.sqlite
+!zen/*/search.json.mozlz4
+!zen/*/zen-keyboard-shortcuts.json
+!zen/*/zen-themes.json
+
+supermaven/*/**
+!supermaven/config.json

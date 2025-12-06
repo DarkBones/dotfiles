@@ -1,0 +1,24 @@
+[Unit]
+Description=PostgreSQL Database Service
+After=docker.service
+BindsTo=default.target
+
+[Service]
+ExecStartPre=-/usr/bin/docker network create ai-network || true
+ExecStart=/usr/bin/docker run --rm \
+    --network=ai-network \
+    --name=postgres \
+    -p 5432:5432 \
+    -v %h/Apps/postgres:/var/lib/postgresql/data \
+    -e POSTGRES_USER=user \
+    -e POSTGRES_PASSWORD=password \
+    -e POSTGRES_DB=default_db \
+    postgres:16-alpine
+ExecStop=/usr/bin/docker stop postgres
+ExecStopPost=/usr/bin/docker rm postgres
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

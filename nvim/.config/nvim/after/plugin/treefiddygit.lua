@@ -23,4 +23,9 @@ map(
     "<cmd>Telescope tree_fiddy_git create_worktree_stash<CR>",
     { desc = "New Worktree with [N]ew Stash" }
 )
-map("n", "<leader>gc", "<cmd>lua require('TreeFiddyGit').checkout_branch()<CR>", { desc = "[C]heckout Branch" })
+map(
+    "n",
+    "<leader>gc",
+    "<cmd>lua require('TreeFiddyGit').checkout_branch()<CR>",
+    { desc = "[C]heckout Branch" }
+)

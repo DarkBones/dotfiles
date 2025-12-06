@@ -1,0 +1,16 @@
+[Unit]
+Description=Jackett
+
+[Service]
+ExecStart=/usr/bin/docker run --rm \
+    -p 9117:9117 \
+    --name jackett \
+    lscr.io/linuxserver/jackett:latest
+ExecStop=/usr/bin/docker stop jackett
+ExecStopPost=/usr/bin/docker rm jackett
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
