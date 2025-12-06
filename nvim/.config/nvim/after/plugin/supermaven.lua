@@ -13,4 +13,7 @@ sm.setup({
     end,
 })
 
+local api = require("supermaven-nvim.api")
+api.use_free_version()
+
 map("n", "<leader>at", "<cmd>SupermavenToggle<CR>", { desc = "SuperMaven Toggle" })
